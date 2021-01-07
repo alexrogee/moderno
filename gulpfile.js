@@ -7,6 +7,7 @@ const uglify       = require('gulp-uglify-es').default;
 const autoprefixer = require('gulp-autoprefixer');
 const imagemin     = require('gulp-imagemin');
 const del          = require('del');
+const cssmin       = require('gulp-cssmin');
 
 function browsersync() {
    browserSync.init({
@@ -41,6 +42,7 @@ function images(){
 function scripts() {
    return src([
       'node_modules/jquerry/index.js',
+      'node_modules/slick-carousel/slick/slick.js',
       'app/js/main.js'
    ])
       .pipe(concat('main.min.js'))
@@ -49,9 +51,9 @@ function scripts() {
       .pipe(browserSync.stream())
 }
 
-function styles() {
-   return src('app/scss/style.scss')
-         .pipe(scss({outputStyle: 'compressed'}))
+function sass() {
+   return src('app/scss/**/*.scss')
+         .pipe(scss({outputStyle: 'expanded'}))
          .pipe(concat('style.min.css'))
          .pipe(autoprefixer({
             overrideBrowserslist: ['last 10 versions'],
@@ -60,6 +62,16 @@ function styles() {
          .pipe(dest('app/css'))
          .pipe(browserSync.stream())
 }
+
+function styles() {
+   return src([
+      'node_modules/normalize.css/normalize.css',
+      'node_modules/slick-carousel/slick/slick.css'
+   ])
+   .pipe(concat('libs.min.css'))
+   .pipe(cssmin())
+   .pipe(dest('app/css'))
+};
 
 function build () {
    return src([
@@ -73,18 +85,19 @@ function build () {
 }
 
 function watching() {
-   watch(['app/scss/**/*.scss'], styles)
+   watch(['app/scss/**/*.scss'], sass)
    watch(['app/js/**/*.js', '!app/js/main.min.js'], scripts)
    watch(['app/*.html']).on('change', browserSync.reload);
 }
 
 
-exports.styles = styles;
+exports.sass = sass;
 exports.watching = watching;
 exports.browsersync = browsersync;
 exports.scripts = scripts;
 exports.images = images;
 exports.cleanDist = cleanDist;
+exports.styles = styles;
 
 exports.build = series(cleanDist, images, build);
-exports.default = parallel(styles, scripts, browsersync, watching);
+exports.default = parallel(sass, styles, scripts, browsersync, watching);
