@@ -32,3 +32,27 @@ ul, li {
    margin: 0 auto;
    padding: 0 15px;
 }
+
+.container-fluid {
+   max-width: 100%;
+   margin: 0 auto;
+   padding: 0 30px;
+}
+
+@media (max-width: 720px){
+   .container-fluid{
+      padding: 0 15px;
+   }
+}
+
+.title{
+   color: $bg;
+   font-weight: 700;
+   text-align: center;
+   font-size: 36px;
+}
+
+.rate-star{
+   display: inline-block;
+   margin-right: 13px;
+}
