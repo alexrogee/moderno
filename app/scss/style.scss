@@ -384,7 +384,205 @@
       min-height: 64px;
       background: #fff;
       padding: 14px 43px;
-      
+   }
+}
+//end author
+//start tutorial
+.tutorial{
+   padding: 75px 0 164px;
+   &__title{
+      margin-bottom: 65px;
+   }
+   &__inner{
+      display: flex;
+      justify-content: space-between;
+   }
+   &__item{
+      max-width: 370px;
+      width: 100%;
+      &-image{
+         min-height: 270px;
+         background-repeat: no-repeat;
+         background-position: center;
+         background-size: cover;
+      }
+      &-title{
+         background: #f8f8f8;
+         font-size: 24px;
+         @include f700;
+         text-align: center;
+         min-height: 100px;
+         padding: 40px 10px;
+         color: $bg;
+      }
+   }
+}
+//end tutorial
+//start footer
+.footer{
+   background: $bg;
+   &__content{
+      padding: 115px 0 100px;
    }
 }
 
+.footer__inner{
+   display: flex;
+   justify-content: space-between;
+}
+
+.footer__copy{
+   border: 1px solid #424d53;
+   padding: 28px 0 35px;
+}
+
+.footer__copy-text{
+   color: #919699;
+   text-align: center;
+}
+
+.footer__col{
+   max-width: 265px;
+   width: 100%;
+   &-menu{
+      max-width: 220px;
+   }
+   &-title{
+      font-family: 'Raleway', sans-serif;
+      font-size: 22px;
+      color: #fff;
+      font-weight: 700;
+      padding-bottom: 22px;
+      margin-bottom: 30px;
+      position: relative;
+      &::after{
+         content: '';
+         position: absolute;
+         bottom: 0;
+         left: 2px;
+         width: 51px;
+         height: 3px;
+         background: $green;
+      }
+   }
+   &-text{
+      color: #b7c3c8;
+      margin-bottom: 35px;
+      line-height: 24px;
+   }
+}
+
+.footer__info{
+   margin-top: 18px;
+   font-family: 'Lato', sans-serif;
+   font-size: 16px;
+   color: #fff;
+   line-height: 24px;
+   padding-left: 30px;
+   position: relative;
+   &::before{
+      content: '\f041';
+      font-family: 'icomoon';
+      color: $green;
+      font-size: 18px;
+      position: absolute;
+      top: 0;
+      left: 0;
+   }
+}
+
+.footer__info-phone{
+    &::before{
+      content: '\f095';
+   }
+}
+
+.footer__col-list{
+      a{
+         margin-bottom: 24px;
+         color: #b7c3c8;
+         padding-left: 22px;
+         position: relative;
+         &::before{
+            content: '\f105';
+            position: absolute;
+            font-family: 'icomoon';
+            color: $green;
+            left: 0;
+            font-size: 18px;
+            top: -3px;
+         }
+      }
+}
+
+.footer__social-link{
+   margin-bottom: 33px;
+   li{
+      display: inline-block;
+      & + li{
+         margin-left: 7px;
+      }
+   }
+   a{
+      width: 28px;
+      height: 28px;
+      background-image: url(../images/css_sprites.png);
+   }
+}
+
+.link-twitter{
+   background-position: -28px 0;
+}
+
+.link-youtube{
+   background-position: 0 -28px;
+}
+
+.link-pinterest{
+   background-position: -28px -28px;
+}
+
+.link-linkedin{
+   background-position: -56px 0;
+}
+
+.footer__form-title{
+   font-size: 20px;
+   color: #fff;
+   margin-bottom: 20px;
+}
+
+.footer__form{
+   position: relative;
+   input{
+      border: none;
+      background-color: #2f3c43;
+      display: block;
+      width: 100%;
+      height: 40px;
+      color: #fff;
+      font-size: 14px;
+      padding-left: 13px;
+      padding-right: 50px;
+      &::placeholder{
+         color: #697378;
+      }
+   }
+   button{
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: $green;
+      border: none;
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
+      &::before{
+         content:'\f124';
+         font-family: 'icomoon';
+         color: #fff;
+         font-size: 20px;
+         
+      }
+   }
+}
