@@ -15,6 +15,23 @@ body {
    color: $text;
 }
 
+html,
+body {
+	height: 100%;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+.content {
+	flex: 1 0 auto;
+}
+.footer {
+	flex: 0 0 auto;
+}
+
 a {
    display: inline-block;
    text-decoration: none;
@@ -45,6 +62,10 @@ ul, li {
    }
 }
 
+.page-content {
+   background: $grey;
+}
+
 .title{
    color: $bg;
    @include f700;
@@ -55,4 +76,34 @@ ul, li {
 .rate-star{
    display: inline-block;
    margin-right: 13px;
+}
+
+.breadcrumbs{
+   &__inner{
+      padding: 50px 0 44px;
+   }
+   &__list{
+      li{
+         display: inline-block;
+         position: relative;
+         & + li{
+            padding-left: 24px;
+               &::before{
+               content: '-';
+               position: absolute;
+               left: 8px;
+               color: $green;
+            }
+         }
+         &:last-child{
+            a, span {
+            color: $bg;
+            }
+         }   
+      }
+      a {
+         color: #b0bec5;
+      }
+   }
+
 }

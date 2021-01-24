@@ -11,6 +11,7 @@ const cssmin       = require('gulp-cssmin');
 
 
 
+
 function browsersync() {
    browserSync.init({
       server : {
@@ -47,6 +48,7 @@ function scripts() {
       'node_modules/slick-carousel/slick/slick.js',
       'node_modules/mixitup/dist/mixitup.js',
       'node_modules/rateyo/src/jquery.rateyo.js',
+      'node_modules/ion-rangeslider/js/ion.rangeSlider.js',
       'app/js/main.js',
    ])
       .pipe(concat('main.min.js'))
@@ -72,6 +74,7 @@ function styles() {
       'node_modules/normalize.css/normalize.css',
       'node_modules/slick-carousel/slick/slick.css',
       'node_modules/rateyo/src/jquery.rateyo.css',
+      'node_modules/ion-rangeslider/css/ion.rangeSlider.css'
    ])
    .pipe(concat('libs.min.css'))
    .pipe(cssmin())
