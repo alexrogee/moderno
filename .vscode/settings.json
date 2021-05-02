@@ -1,0 +1,5 @@
+{
+   "editor.formatOnPaste": true,
+   "liveServer.settings.CustomBrowser": "chrome",
+   "php.validate.executablePath": ""
+}

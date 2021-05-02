@@ -7,6 +7,10 @@ const uglify       = require('gulp-uglify-es').default;
 const autoprefixer = require('gulp-autoprefixer');
 const imagemin     = require('gulp-imagemin');
 const del          = require('del');
+const cssmin       = require('gulp-cssmin');
+
+
+
 
 function browsersync() {
    browserSync.init({
@@ -21,7 +25,7 @@ function cleanDist() {
    return del('dist')
 }
 
-function images(){
+function images() {
    return src('app/images/**/*')
       .pipe(imagemin([
     imagemin.gifsicle({interlaced: true}),
@@ -40,8 +44,12 @@ function images(){
 
 function scripts() {
    return src([
-      'node_modules/jquerry/index.js',
-      'app/js/main.js'
+      'node_modules/jquery/dist/jquery.js',
+      'node_modules/slick-carousel/slick/slick.js',
+      'node_modules/mixitup/dist/mixitup.js',
+      'node_modules/rateyo/src/jquery.rateyo.js',
+      'node_modules/ion-rangeslider/js/ion.rangeSlider.js',
+      'app/js/main.js',
    ])
       .pipe(concat('main.min.js'))
       .pipe(uglify())
@@ -49,8 +57,8 @@ function scripts() {
       .pipe(browserSync.stream())
 }
 
-function styles() {
-   return src('app/scss/style.scss')
+function sass() {
+   return src('app/scss/**/*.scss')
          .pipe(scss({outputStyle: 'compressed'}))
          .pipe(concat('style.min.css'))
          .pipe(autoprefixer({
@@ -59,6 +67,18 @@ function styles() {
          }))
          .pipe(dest('app/css'))
          .pipe(browserSync.stream())
+}
+
+function styles() {
+   return src([
+      'node_modules/normalize.css/normalize.css',
+      'node_modules/slick-carousel/slick/slick.css',
+      'node_modules/rateyo/src/jquery.rateyo.css',
+      'node_modules/ion-rangeslider/css/ion.rangeSlider.css'
+   ])
+   .pipe(concat('libs.min.css'))
+   .pipe(cssmin())
+   .pipe(dest('app/css'))
 }
 
 function build () {
@@ -73,18 +93,19 @@ function build () {
 }
 
 function watching() {
-   watch(['app/scss/**/*.scss'], styles)
-   watch(['app/js/**/*.js', '!app/js/main.min.js'], scripts)
+   watch(['app/scss/**/*.scss'], sass);
+   watch(['app/js/**/*.js', '!app/js/main.min.js'], scripts);
    watch(['app/*.html']).on('change', browserSync.reload);
 }
 
 
-exports.styles = styles;
+exports.sass = sass;
 exports.watching = watching;
 exports.browsersync = browsersync;
 exports.scripts = scripts;
 exports.images = images;
 exports.cleanDist = cleanDist;
+exports.styles = styles;
 
 exports.build = series(cleanDist, images, build);
-exports.default = parallel(styles, scripts, browsersync, watching);
+exports.default = parallel(sass, styles, scripts, browsersync, watching);
